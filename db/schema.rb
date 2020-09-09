@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_09_104511) do
+ActiveRecord::Schema.define(version: 2020_09_09_111134) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(version: 2020_09_09_104511) do
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "category_relations", force: :cascade do |t|
+    t.integer "parent_id"
+    t.integer "child_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["child_id"], name: "index_category_relations_on_child_id"
+    t.index ["parent_id", "child_id"], name: "index_category_relations_on_parent_id_and_child_id", unique: true
+    t.index ["parent_id"], name: "index_category_relations_on_parent_id"
   end
 
 end

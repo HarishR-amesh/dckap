@@ -1,7 +1,8 @@
 <%= form_with(model: category, local: true) do |form| %>
   <% if category.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
+      <h2><%= pluralize(category.errors.count, "error") %> prohibited this
+        category from being saved:</h2>
 
       <ul>
         <% category.errors.full_messages.each do |message| %>
@@ -14,6 +15,17 @@
   <div class="field">
     <%= form.label :title %>
     <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :parent_ids %>
+    <%= form.collection_select(:parent_ids,
+                               Category.all,
+                               :id,
+                               :title,
+                               { include_blank: false, selected: category.parents.map(&:id) },
+                               { multiple: true }) %>
+    <%= category.parents.ids %>
   </div>
 
   <div class="actions">
