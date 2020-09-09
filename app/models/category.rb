@@ -2,6 +2,10 @@
 
 # Category
 class Category < ApplicationRecord
+  # Validations
+  validates :title,
+            presence: true,
+            uniqueness: true
   # Associations
   has_many :parent_relations,
            class_name: 'CategoryRelation',
