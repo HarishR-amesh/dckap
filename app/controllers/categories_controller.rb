@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :set_category_option, only: [:new, :edit, :create, :update]
 
   # GET /categories
   # GET /categories.json
@@ -70,5 +71,11 @@ class CategoriesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def category_params
       params.require(:category).permit(:title, parent_ids: [])
+    end
+
+    def set_category_option
+      category_rejects = @category.all_children.map(&:child_id)
+      category_rejects << @category.id
+      @category_option = Category.all.reject{|category| category_rejects.include?(category.id) }
     end
 end

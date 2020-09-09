@@ -7,7 +7,7 @@
 
 <p>
   <strong>Childrens:</strong>
-  <%= @category.all_children.map(&:title) %>
+  <%= @category.all_children.map(&:title).uniq %>
 </p>
 
 

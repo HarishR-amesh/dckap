@@ -20,10 +20,10 @@
   <div class="field">
     <%= form.label :parent_ids %>
     <%= form.collection_select(:parent_ids,
-                               Category.all.reject{ |c| category == c},
+                               @category_option,
                                :id,
                                :title,
-                               { include_blank: false, selected: category.parents.map(&:id)},
+                               { include_blank: false, selected: category.parents.map(&:id) },
                                { multiple: true, class: 'select2-multiple' }) %>
   </div>
 

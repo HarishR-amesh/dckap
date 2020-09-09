@@ -2,6 +2,8 @@
 
 # CategoryRelation
 class CategoryRelation < ApplicationRecord
+  # Validations
+  validates :parent_id, exclusion: { in: ->(relation) { [relation.child_id] } }
   # Associations
   belongs_to :parent_category,
              class_name: 'Category',
