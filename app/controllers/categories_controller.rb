@@ -74,8 +74,11 @@ class CategoriesController < ApplicationController
     end
 
     def set_category_option
-      category_rejects = @category.all_children.map(&:child_id)
-      category_rejects << @category.id
+      category_rejects = []
+      if @category
+        category_rejects = @category.all_children.map(&:child_id)
+        category_rejects << @category.id
+      end
       @category_option = Category.all.reject{|category| category_rejects.include?(category.id) }
     end
 end
